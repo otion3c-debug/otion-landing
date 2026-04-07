@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Otion LLC — Business Solutions for Growing Companies</title>
+  <meta name="description" content="Otion LLC helps local businesses in Metro Atlanta build their digital presence, automate operations, and grow — with human vision and AI precision." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #ffffff;
+      --bg-subtle:    #f8f8f8;
+      --bg-card:      #ffffff;
+      --bg-card-hi:   #fafafa;
+      --accent:       #10B981;
+      --accent-dark:  #047857;
+      --accent-dim:   rgba(16, 185, 129, 0.08);
+      --text:         #1a1a2e;
+      --text-muted:   #64748b;
+      --text-sub:     #94a3b8;
+      --border:       #e2e8f0;
+      --shadow:       0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg:    0 12px 48px rgba(0,0,0,0.10);
+      --font-head:    'Outfit', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --radius:       12px;
+      --radius-lg:    20px;
+      --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    [data-theme="dark"] {
+      --bg:           #0f0f0f;
+      --bg-subtle:    #161616;
+      --bg-card:      #1a1a1a;
+      --bg-card-hi:   #222222;
+      --accent:       #10B981;
+      --accent-dark:  #34D399;
+      --accent-dim:   rgba(255, 107, 53, 0.15);
+      --text:         #f0f0f0;
+      --text-muted:   #a8a8a8;
+      --text-sub:     #6b6b6b;
+      --border:       rgba(255,255,255,0.08);
+      --shadow:       0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg:    0 12px 48px rgba(0,0,0,0.5);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.75;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 30px;
+      border-radius: 50px;
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(255,107,53,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,107,53,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .nav-logo { color: var(--text); } .nav { background: rgba(255,255,255,0.95); } .nav-logo {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { padding: 10px 22px !important; font-size: 0.85rem !important; }
+    .theme-toggle {
+      background: var(--accent-dim);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    [data-theme="dark"] .theme-toggle { color: var(--text-muted); }
+    .nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+
+    /* Mobile menu */
+    .mobile-menu { display: none; position: fixed; inset: 0; background: #fff; z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 28px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--font-head); font-size: 1.8rem; font-weight: 700; color: var(--text); text-decoration: none; }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 140px 0 100px;
+      background: var(--bg-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 18px;
+      border-radius: 50px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(255,107,53,0.2);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+    .hero-headline {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-headline .accent { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      max-width: 460px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-tagline {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .hero-photo {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-photo-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      padding: 12px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+    .hero-photo-badge span { color: var(--accent); }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+    .trust-bar-inner {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .trust-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-icon svg { width: 18px; height: 18px; stroke: #10B981; fill: none; stroke-width: 2; }
+
+    /* ── SERVICES ── */
+    .services { padding: 100px 0; background: var(--bg-subtle); }
+    .services-header { text-align: center; margin-bottom: 64px; }
+    .services-header .section-sub { margin: 0 auto; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 26px;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .service-img {
+      width: 100%;
+      height: 180px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+      background: var(--bg-subtle);
+    }
+    .service-img img { width: 100%; height: 100%; object-fit: cover; }
+    .service-title {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .service-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── ABOUT ── */
+    .about { padding: 100px 0; background: #fff; }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .about-photo {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .about-photo img { width: 100%; height: 480px; object-fit: cover; display: block; }
+    .about-headline {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .about-headline em { font-style: normal; color: var(--accent); }
+    .about-copy { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 14px; }
+    .about-copy strong { color: var(--text); }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .about-stat {
+      background: var(--bg-subtle);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+    }
+    .about-stat-num {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--accent);
+      display: block;
+    }
+    .about-stat-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── RESULTS ── */
+    .results { padding: 100px 0; background: var(--bg-subtle); }
+    .results-header { text-align: center; margin-bottom: 64px; }
+    .results-header .section-sub { margin: 0 auto; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .result-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .result-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .result-img { width: 100%; height: 200px; overflow: hidden; }
+    .result-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
+    .result-card:hover .result-img img { transform: scale(1.04); }
+    .result-body { padding: 24px; }
+    .result-category { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
+    .result-stat { font-family: var(--font-head); font-size: 2.4rem; font-weight: 900; color: var(--text); line-height: 1; margin-bottom: 4px; }
+    .result-label { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .result-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 100px 0;
+      background: #0B1D3A;
+      color: #fff;
+    }
+    .cta-inner { text-align: center; max-width: 680px; margin: 0 auto; }
+    .cta-headline {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .cta-headline .accent { color: var(--accent); }
+    .cta-sub { font-size: 1.05rem; color: rgba(255,255,255,0.65); margin-bottom: 36px; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .cta-phone {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .cta-phone svg { stroke: #10B981; fill: none; stroke-width: 2; }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 48px 0 36px;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+    .footer-logo { display: flex; justify-content: center; }
+    .footer-logo span { color: var(--accent); }
+    .footer-tagline { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-info { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
+    .footer-info-item { display: flex; align-items: center; gap: 7px; font-size: 0.85rem; color: var(--text-muted); }
+    .footer-info-item svg { stroke: #10B981; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .footer-location { font-size: 0.78rem; color: var(--text-sub); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .footer-bottom { width: 100%; border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-copy { font-size: 0.75rem; color: var(--text-sub); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.75rem; color: var(--text-sub); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .services-grid, .results-grid { grid-template-columns: 1fr 1fr; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo { display: none; }
+    }
+    @media (max-width: 640px) {
+      .services-grid, .results-grid, .about-inner { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+      .hero { padding: 120px 0 60px; }
+      .about-stats { grid-template-columns: 1fr; }
+      .footer-info { flex-direction: column; align-items: center; gap: 14px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    [data-theme="dark"] .nav-logo,
+    [data-theme="dark"] .nav-logo span {
+      color: #ffffff !important;
+    }
+    [data-theme="dark"] .nav {
+      background: rgba(15, 15, 15, 0.97) !important;
+    }
+    [data-theme="dark"] .hero {
+      background: #0f0f0f;
+    }
+    [data-theme="dark"] .hero-photo-badge {
+      background: rgba(15, 15, 15, 0.9);
+      color: #f0f0f0;
+    }
+    [data-theme="dark"] .trust-bar {
+      background: #0f0f0f;
+      border-color: rgba(255,255,255,0.08);
+    }
+    [data-theme="dark"] .trust-item {
+      color: rgba(255,255,255,0.7);
+    }
+    [data-theme="dark"] .service-card,
+    [data-theme="dark"] .result-card {
+      background: #1a1a1a;
+      border-color: rgba(255,255,255,0.08);
+    }
+    [data-theme="dark"] .service-img {
+      background: #222;
+    }
+    [data-theme="dark"] .about-photo img {
+      filter: brightness(0.9);
+    }
+    [data-theme="dark"] .result-img img {
+      filter: brightness(0.85);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><div style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900; color: inherit; letter-spacing: -0.02em;">otion<span style="color:#10B981">.</span>solutions</div></a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#results">Results</a></li>
+        <li>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <svg id="themeIconLight" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg id="themeIconDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          </button>
+        </li>
+        <li><a href="tel:6784706750" class="btn btn-primary nav-cta">(678) 470-6750</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Menu">
+        <svg width="26" height="26" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" stroke="#1a1a2e" stroke-width="2.2"/><line x1="3" y1="12" x2="21" y2="12" stroke="#1a1a2e" stroke-width="2.2"/><line x1="3" y1="18" x2="21" y2="18" stroke="#1a1a2e" stroke-width="2.2"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMobile()">Services</a>
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#results" onclick="closeMobile()">Results</a>
+    <a href="tel:6784706750" onclick="closeMobile()">(678) 470-6750</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text reveal">
+          <div class="hero-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Metro Atlanta's Tech Partner
+          </div>
+
+          
+          <h1 class="hero-headline">
+            <span>We</span> <span class="accent">Build.</span><br>
+            <span>You</span> <span class="accent">Grow.</span>
+          </h1>
+          <p class="hero-sub">Tech solutions for local businesses in Metro Atlanta. Websites, automations, and digital systems that actually work — built by people who understand what it takes to run a business.</p>
+
+          <div class="hero-actions">
+            <a href="tel:6784706750" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.55 3.4 2 2 0 013.53 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.9a16 16 0 006 6l.83-.83a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              Get a Free Consultation
+            </a>
+            <a href="#services" class="btn btn-outline">See What We Do</a>
+          </div>
+        </div>
+
+        <div class="hero-photo reveal reveal-delay-2">
+          <img src="img/hero-handshake.jpg" alt="Business handshake — diverse partnership" />
+          <div class="hero-photo-badge">
+            ⭐ Trusted by Businesses Across Metro Atlanta
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-bar-inner">
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          Same-Day Response
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          Metro Atlanta
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          Local Businesses Only
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          Results You Can See
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header reveal">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Everything Your Business Needs<br>to Show Up Online</h2>
+        <p class="section-sub">We build the digital foundation so you can focus on what you do best — running your business.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80" alt="Website on laptop" />
+          </div>
+          <h3 class="service-title">Website Development</h3>
+          <p class="service-desc">Fast, professional websites that make your business impossible to ignore. Mobile-ready, built to convert visitors into customers.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1594663653925-365bcbf7ef86?fm=jpg&q=80&w=600&auto=format&fit=crop" alt="Google Business Optimization" />
+          </div>
+          <h3 class="service-title">Google Business Optimization</h3>
+          <p class="service-desc">Your Google profile, perfected. Reviews, photos, hours, and location — all optimized so local customers find you first.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80" alt="Automation dashboard on screen" />
+          </div>
+          <h3 class="service-title">Process Automation</h3>
+          <p class="service-desc">Automate the tasks that waste your time. Estimates, follow-ups, invoicing — handled automatically so you can focus on your business.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&q=80" alt="Online scheduling calendar" />
+          </div>
+          <h3 class="service-title">Online Scheduling</h3>
+          <p class="service-desc">Customers book, reschedule, and pay — without calling you. 24/7, automatic, always accurate.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-img">
+            <img src="img/digital-presence.jpg" alt="Digital marketing and business team" />
+          </div>
+          <h3 class="service-title">Digital Presence</h3>
+          <p class="service-desc">Your brand, built to last. Logos, social media setup, and a consistent presence that makes customers trust you before they walk in the door.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Business dashboard and tools" />
+          </div>
+          <h3 class="service-title">Business Tools</h3>
+          <p class="service-desc">Email setups, CRM systems, invoicing workflows — the behind-the-scenes tech that makes your business run smoother than it has any right to.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Website audit and analytics report" />
+          </div>
+          <h3 class="service-title">Website Audit</h3>
+          <p class="service-desc">Not sure what's broken? We audit your website end-to-end and deliver a full written report with prioritized fixes — in 3 days. Add a strategy call, competitive analysis, or implementation road map.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-photo reveal">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80" alt="Team collaborating on business technology" />
+        </div>
+        <div class="about-right reveal reveal-delay-2">
+          <span class="section-label">Who We Are</span>
+          <h2 class="about-headline" style="color:#334155;">We're not just vendors.<br>We're <em style="color:var(--accent);">partners.</em></h2>
+          <p class="about-copy" style="color:#1a1a2e;">Otion was built for one reason: to give local businesses access to the same technology and digital presence that big companies have — without the big company price tag.</p>
+          <p class="about-copy" style="color:#1a1a2e;">We combine human relationship skills — understanding your business, your customers, your goals — with AI-powered execution that delivers faster and more accurately than traditional agencies.</p>
+          <p class="about-copy" style="font-weight:600; color:#1a1a2e; font-size:1.05rem;">You bring the vision.<br>We bring the precision.</p>
+
+          <div class="about-stats">
+            <div class="about-stat">
+              <span class="about-stat-num">100%</span>
+              <span class="about-stat-label">Locally Owned</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-num">Same Day</span>
+              <span class="about-stat-label">Response Time</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-num">AI</span>
+              <span class="about-stat-label">Powered Delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results" id="results">
+    <div class="container">
+      <div class="results-header reveal">
+        <span class="section-label">Real Results</span>
+        <h2 class="section-title">What We Make Possible</h2>
+        <p class="section-sub">Here's what we help local businesses in Metro Atlanta achieve.</p>
+      </div>
+
+      <div class="results-grid">
+        <div class="result-card reveal reveal-delay-1">
+          <div class="result-img">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Restaurant interior" />
+          </div>
+          <div class="result-body">
+            <div class="result-category">Restaurant / Retail</div>
+            <div class="result-stat">+40%</div>
+            <div class="result-label">Potential: More Bookings for Your Restaurant</div>
+            <p class="result-desc">What's possible: A mobile-optimized site with online ordering turns phone-only bookings into a steady stream of digital reservations.</p>
+          </div>
+        </div>
+
+        <div class="result-card reveal reveal-delay-2">
+          <div class="result-img">
+            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80" alt="HVAC technician at job" />
+          </div>
+          <div class="result-body">
+            <div class="result-category">Home Services</div>
+            <div class="result-stat">+200</div>
+            <div class="result-label">New Visitors / Month</div>
+            <p class="result-desc">What's possible: An optimized Google profile pulls in 200+ targeted local visitors monthly — customers ready to book, right now.</p>
+          </div>
+        </div>
+
+        <div class="result-card reveal reveal-delay-3">
+          <div class="result-img">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&q=80" alt="Auto repair shop" />
+          </div>
+          <div class="result-body">
+            <div class="result-category">Auto / Specialty</div>
+            <div class="result-stat">5 hrs</div>
+            <div class="result-label">Saved Every Week</div>
+            <p class="result-desc">What's possible: Digital estimates and invoices. No more paper, no more chasing. Hours back in your week.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2 class="cta-headline">Your competitors already<br>have a website. <span class="accent">Do you?</span></h2>
+        <p class="cta-sub">Stop leaving money on the table. Let's talk about what your business actually needs.</p>
+        <div class="cta-actions">
+          <a href="tel:6784706750" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.55 3.4 2 2 0 013.53 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.9a16 16 0 006 6l.83-.83a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Let's Talk — (678) 470-6750
+          </a>
+        </div>
+        <div class="cta-phone">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          8735 Dunwoody Place Ste N, Atlanta, GA 30350 · Serving Metro Atlanta &amp; Beyond
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo"><div style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900; color: inherit; letter-spacing: -0.02em;">otion<span style="color:#10B981">.</span>solutions</div></div>
+        <div class="footer-tagline">Business Solutions for Growing Companies</div>
+        <div class="footer-info">
+          <div class="footer-info-item">
+            <svg width="15" height="15" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.55 3.4 2 2 0 013.53 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.9a16 16 0 006 6l.83-.83a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            (678) 470-6750
+          </div>
+          <div class="footer-info-item">
+            <svg width="15" height="15" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Metro Atlanta, Georgia
+          </div>
+        </div>
+        <div class="footer-location">Serving Metro Atlanta &amp; Beyond</div>
+        <div class="footer-bottom">
+          <div class="footer-copy">&copy; 2026 Otion LLC. All rights reserved.</div>
+          <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function initReveal() {
+      const els = document.querySelectorAll('.reveal');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      els.forEach(el => obs.observe(el));
+    })();
+    (function initNav() {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+    })();
+    (function initMobile() {
+      document.getElementById('mobileToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+    })();
+    function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+    // ── THEME TOGGLE ──
+    (function initTheme() {
+      const toggle = document.getElementById('themeToggle');
+      const iconLight = document.getElementById('themeIconLight');
+      const iconDark = document.getElementById('themeIconDark');
+      const saved = localStorage.getItem('pots_theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        iconLight.style.display = 'none';
+        iconDark.style.display = 'block';
+      }
+      toggle.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('pots_theme', 'light');
+          iconLight.style.display = 'block';
+          iconDark.style.display = 'none';
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('pots_theme', 'dark');
+          iconLight.style.display = 'none';
+          iconDark.style.display = 'block';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
