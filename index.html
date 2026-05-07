@@ -40,7 +40,7 @@
       --bg-card-hi:   #222222;
       --accent:       #10B981;
       --accent-dark:  #34D399;
-      --accent-dim:   rgba(255, 107, 53, 0.15);
+      --accent-dim:   rgba(16, 185, 129, 0.15);
       --text:         #f0f0f0;
       --text-muted:   #a8a8a8;
       --text-sub:     #6b6b6b;
@@ -115,12 +115,12 @@
     .btn-primary {
       background: var(--accent);
       color: #fff;
-      box-shadow: 0 4px 16px rgba(255,107,53,0.3);
+      box-shadow: 0 4px 16px rgba(16,185,129,0.3);
     }
     .btn-primary:hover {
       background: var(--accent-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(255,107,53,0.4);
+      box-shadow: 0 8px 24px rgba(16,185,129,0.4);
     }
 
     .btn-outline {
@@ -230,7 +230,7 @@
       right: -60px;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
@@ -248,7 +248,7 @@
       padding: 7px 18px;
       border-radius: 50px;
       background: var(--accent-dim);
-      border: 1px solid rgba(255,107,53,0.2);
+      border: 1px solid rgba(16,185,129,0.2);
       font-size: 0.78rem;
       font-weight: 700;
       color: var(--accent);
@@ -446,6 +446,51 @@
     .result-label { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .result-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
 
+    /* ── CONTACT FORM ── */
+    .contact-section {
+      padding: 100px 0;
+      background: #fff;
+    }
+    .contact-header { text-align: center; margin-bottom: 48px; }
+    .contact-form {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+    }
+    .form-row { margin-bottom: 16px; }
+    .form-row:last-of-type { margin-bottom: 20px; }
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--accent); }
+    .form-select { appearance: auto; }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-row:first-child,
+    .form-row:nth-child(2) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 640px) {
+      .form-row:first-child,
+      .form-row:nth-child(2) {
+        grid-template-columns: 1fr;
+      }
+      .contact-form { padding: 28px 20px; }
+    }
+
     /* ── CTA ── */
     .cta-section {
       padding: 100px 0;
@@ -575,7 +620,7 @@
         <li><a href="tel:4703100480" class="btn btn-primary nav-cta">(470) 310-0480</a></li>
       </ul>
       <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Menu">
-        <svg width="26" height="26" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" stroke="#1a1a2e" stroke-width="2.2"/><line x1="3" y1="12" x2="21" y2="12" stroke="#1a1a2e" stroke-width="2.2"/><line x1="3" y1="18" x2="21" y2="18" stroke="#1a1a2e" stroke-width="2.2"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2.2"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2.2"/><line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2.2"/></svg>
       </button>
     </div>
   </nav>
@@ -734,10 +779,10 @@
         </div>
         <div class="about-right reveal reveal-delay-2">
           <span class="section-label">Who We Are</span>
-          <h2 class="about-headline" style="color:#334155;">We're not just vendors.<br>We're <em style="color:var(--accent);">partners.</em></h2>
-          <p class="about-copy" style="color:#1a1a2e;">Otion was built for one reason: to give local businesses access to the same technology and digital presence that big companies have — without the big company price tag.</p>
-          <p class="about-copy" style="color:#1a1a2e;">We combine human relationship skills — understanding your business, your customers, your goals — with AI-powered execution that delivers faster and more accurately than traditional agencies.</p>
-          <p class="about-copy" style="font-weight:600; color:#1a1a2e; font-size:1.05rem;">You bring the vision.<br>We bring the precision.</p>
+          <h2 class="about-headline">We're not just vendors.<br>We're <em>partners.</em></h2>
+          <p class="about-copy">Otion was built for one reason: to give local businesses access to the same technology and digital presence that big companies have — without the big company price tag.</p>
+          <p class="about-copy">We combine human relationship skills — understanding your business, your customers, your goals — with AI-powered execution that delivers faster and more accurately than traditional agencies.</p>
+          <p class="about-copy" style="font-weight:600; font-size:1.05rem;">You bring the vision.<br>We bring the precision.</p>
 
           <div class="about-stats">
             <div class="about-stat">
@@ -807,6 +852,42 @@
     </div>
   </section>
 
+  <!-- CONTACT FORM -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="contact-header reveal">
+        <span class="section-label">Get In Touch</span>
+        <h2 class="section-title" style="margin-bottom:8px;">Send Us a Message</h2>
+        <p class="section-sub" style="margin:0 auto;">Tell us about your business and what you need. We'll get back to you same day.</p>
+      </div>
+      <form class="contact-form reveal reveal-delay-1" action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your Name" required class="form-input" />
+          <input type="text" name="business" placeholder="Business Name" class="form-input" />
+        </div>
+        <div class="form-row">
+          <input type="tel" name="phone" placeholder="Phone Number" required class="form-input" />
+          <input type="email" name="email" placeholder="Email Address" class="form-input" />
+        </div>
+        <div class="form-row">
+          <select name="service" class="form-input form-select">
+            <option value="">What do you need?</option>
+            <option value="Website">Website</option>
+            <option value="Google Optimization">Google Optimization</option>
+            <option value="AI Receptionist">AI Receptionist / AI Agent</option>
+            <option value="Scheduling">Online Scheduling</option>
+            <option value="Automation">Process Automation</option>
+            <option value="Not sure">Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <textarea name="message" placeholder="Tell us about your business..." rows="4" class="form-input form-textarea"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="font-size:1rem; padding:15px 40px;">Send Message</button>
+      </form>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-section" id="cta">
     <div class="container">
@@ -855,8 +936,8 @@
         <div class="footer-bottom">
           <div class="footer-copy">&copy; 2026 Otion LLC. All rights reserved.</div>
           <div class="footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
           </div>
         </div>
       </div>
