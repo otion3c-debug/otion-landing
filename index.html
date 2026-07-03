@@ -24,6 +24,9 @@
   <meta name="twitter:description" content="Human Ingenuity + AI Power = Real Business Solutions. Serving Metro Atlanta." />
   <meta name="twitter:image" content="https://otion.solutions/img/og-image.jpg" />
 
+  <!-- Security -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self' fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; frame-src 'self' buy.stripe.com; connect-src 'self'; form-action 'self';">
+
   <!-- LocalBusiness Schema -->
   <script type="application/ld+json">
   {
@@ -711,7 +714,10 @@
         </div>
 
         <div class="hero-photo reveal reveal-delay-2">
-          <img src="img/hero-new.jpg" alt="Vintage key with solution tag — unlocking your business potential" />
+          <picture>
+            <source srcset="img/hero-new.webp" type="image/webp">
+            <img src="img/hero-new.jpg" alt="Vintage key with solution tag — unlocking your business potential" />
+          </picture>
           <div class="hero-photo-badge">
             ⭐ Trusted by Businesses Across Metro Atlanta
           </div>
@@ -788,7 +794,10 @@
 
         <div class="service-card reveal reveal-delay-2">
           <div class="service-img">
-            <img src="img/digital-presence.jpg" alt="Digital marketing and business team" />
+            <picture>
+              <source srcset="img/digital-presence.webp" type="image/webp">
+              <img src="img/digital-presence.jpg" alt="Digital marketing and business team" loading="lazy" />
+            </picture>
           </div>
           <h3 class="service-title">Digital Presence</h3>
           <p class="service-desc">Your brand, built to last. Logos, social media setup, and a consistent presence that makes customers trust you before they walk in the door.</p>
